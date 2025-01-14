@@ -15,6 +15,7 @@ def say_time():
 
 schedule.every().minute.at(":00").do(say_time)
 
+print("This program will announce the time every minute, on the minute, in the voice of GLaDOS.")
 say_time()
 while True:
     schedule.run_pending()
