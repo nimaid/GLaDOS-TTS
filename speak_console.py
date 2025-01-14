@@ -4,34 +4,15 @@ import threading
 import time
 
 import glados
-from llamacheck import LlamaChecker
-
-
-PROMPT_ENTRY = ">> "
-
-class TTS:
-    def __init__(self):
-        self.tts = glados.TTS()
-        self.lc = LlamaChecker()
-
-    def speak(self, text: str, correct: Optional[bool] = False):
-        if correct:
-            text = self.lc.correct_text(text)
-            print(f"GLaDOS (text corrected): \"{text}\"")
-        else:
-            print(f"GLaDOS: \"{text}\"")
-        
-        self.tts.speak_text_aloud(text)
 
 
 class MessageQueue:
-    def __init__(self, delay: Optional[float] = 1.0, correction_command: Optional[str] = "/"):
+    def __init__(self, delay: Optional[float] = 1.0):
         self.delay = delay
-        self.correction_command = correction_command
         
         self.message_queue = []
         
-        self.tts = TTS()
+        self.tts = glados.TTS()
         
         self.thread = None
         self.run = False
@@ -42,22 +23,9 @@ class MessageQueue:
         if len(message) == 0:
             return
         
-        correct = False
-        if message[:len(self.correction_command)] == self.correction_command:
-            correct = True
-            message = message[1:]
+        print(f"Adding message: \"{message}\"")
         
-        if correct:
-            print(f"Adding (w/ correction): \"{message}\"")
-        else:
-            print(f"Adding message: \"{message}\"")
-        
-        self.message_queue.append(
-            {
-                "message": message,
-                "correct": correct
-            }
-        )
+        self.message_queue.append(message)
         
         self.run = True
         if not self.running:
@@ -75,10 +43,11 @@ class MessageQueue:
         self.run = False
     
     def _process_message(self):
-        msg = self.message_queue[0]
+        message = self.message_queue[0]
         self.message_queue = self.message_queue[1:]
-            
-        self.tts.speak(msg["message"], correct=msg["correct"])
+        
+        print(f"GLaDOS: \"{message}\"")
+        self.tts.speak_text_aloud(message)
     
     def _message_loop(self):
         self.running = True
@@ -87,11 +56,12 @@ class MessageQueue:
             time.sleep(self.delay)
         self.running = False
 
+
 def main(args):
     mq = MessageQueue()
     
     while True:
-        message = input(PROMPT_ENTRY)
+        message = input(">> ")
         mq.add(message)
 
 
