@@ -23,7 +23,7 @@ class MessageQueue:
         if len(message) == 0:
             return
         
-        print(f"Adding message: \"{message}\"")
+        self._print(f"Adding message: \"{message}\"")
         
         self.message_queue.append(message)
         
@@ -46,7 +46,7 @@ class MessageQueue:
         message = self.message_queue[0]
         self.message_queue = self.message_queue[1:]
         
-        print(f"GLaDOS: \"{message}\"")
+        self._print(f"GLaDOS: \"{message}\"")
         self.tts.speak_text_aloud(message)
     
     def _message_loop(self):
@@ -55,17 +55,17 @@ class MessageQueue:
             self._process_message()
             time.sleep(self.delay)
         self.running = False
+    
+    def _print(self, text: str):
+        print(text)
 
 
-def main(args):
+def main():
     mq = MessageQueue()
     
     while True:
         message = input(">> ")
         mq.add(message)
 
+main()
 
-def run():
-    main(sys.argv[1:])
-
-run()
