@@ -1,4 +1,5 @@
 # GLaDOS Text-To-Speech Module
+[Adapted from dnhkng's GLaDOS repository.](https://github.com/dnhkng/GlaDOS)
 
 TODO
 
