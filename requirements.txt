@@ -1,0 +1,4 @@
+onnxruntime
+# numpy
+sounddevice
+num2words
