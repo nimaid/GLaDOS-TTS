@@ -69,6 +69,7 @@ class MessageQueue:
 class MainWindow:
     def __init__(self):
         self.w = tk.Tk()
+        self.w.iconbitmap("icon.ico")
         self.w.title("GLaDOS TTS Engine")
         self.w.resizable(width=False, height=False)
         
@@ -94,9 +95,9 @@ class MainWindow:
         
         self.mq = MessageQueue(print_func = self._print_to_box)
         
-        self.w.bind('<Destroy>', lambda event: self._cleanup())
-        
         self.w.mainloop()
+        
+        self._cleanup()
     
     def _add_message(self, message: str):
         self.mq.add(message)
