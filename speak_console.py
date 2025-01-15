@@ -73,10 +73,10 @@ class MainWindow:
         self.w.title("GLaDOS TTS Engine")
         self.w.resizable(width=False, height=False)
         
-        self.text_box = tk.Text(self.w, state="disabled")
+        self.text_box = tk.Text(self.w, state="disabled", fg="white", bg="black")
         self.text_box.grid(row=0, column=0, columnspan=2, sticky="nsew")
         
-        self.entry_box = tk.Entry(self.w)
+        self.entry_box = tk.Entry(self.w, state="disabled")
         self.entry_box.grid(row=1, column=0, sticky="nesw")
         
         self.submit_button = tk.Button(
@@ -93,11 +93,18 @@ class MainWindow:
         
         self.entry_box.focus_set()
         
-        self.mq = MessageQueue(print_func = self._print_to_box)
+        self._print_to_box("Loading GLaDOS, please wait...")
+        self.w.after(200, self._create_message_queue)
         
         self.w.mainloop()
         
         self._cleanup()
+    
+    def _create_message_queue(self):
+        self.mq = MessageQueue(print_func = self._print_to_box)
+        self._print_to_box("All systems ready.")
+        
+        self.entry_box.configure(state="normal")
     
     def _add_message(self, message: str):
         self.mq.add(message)
