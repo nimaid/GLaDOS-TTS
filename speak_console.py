@@ -49,9 +49,9 @@ class MessageQueue:
         if len(message) == 0:
             return
         
-        self.print_func(f"ADDING: \"{message}\"")
-        
         self.message_queue.append(message)
+        
+        self._print_message_queue()
         
         self.run = True
         if not self.running:
@@ -73,10 +73,11 @@ class MessageQueue:
     
     def _process_message(self):
         message = self.message_queue[0]
-        self.message_queue = self.message_queue[1:]
         
-        self.print_func(f"READING: \"{message}\"")
         self.tts.speak_text_aloud(message)
+        
+        self.message_queue = self.message_queue[1:]
+        self._print_message_queue()
     
     def _message_loop(self):
         self.running = True
@@ -84,6 +85,14 @@ class MessageQueue:
             self._process_message()
             time.sleep(self.delay)
         self.running = False
+    
+    def _print_message_queue(self):
+        all_messages = ""
+        for message in self.message_queue:
+            all_messages += f">> \"{message}\"\n"
+        
+        self.print_func(all_messages)
+    
 
 
 class MainWindow:
@@ -142,6 +151,7 @@ class MainWindow:
     
     def _print_to_box(self, text: str):
         self.text_box.configure(state="normal")
+        self.text_box.delete("1.0", "end")
         self.text_box.insert("end", f"{text}\n")
         self.text_box.see("end")
         self.text_box.configure(state="disabled")
