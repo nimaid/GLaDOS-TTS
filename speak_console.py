@@ -69,8 +69,10 @@ class MessageQueue:
 class MainWindow:
     def __init__(self):
         self.w = tk.Tk()
+        self.title = "GLaDOS TTS Engine"
         self.w.iconbitmap("icon.ico")
-        self.w.title("GLaDOS TTS Engine")
+        
+        self.w.title(f"{self.title} (loading, please wait...)")
         self.w.resizable(width=False, height=False)
         
         self.text_box = tk.Text(self.w, state="disabled", fg="white", bg="black")
@@ -82,18 +84,17 @@ class MainWindow:
         self.submit_button = tk.Button(
             self.w,
             text = "Submit",
-            command = self._submit_button_func
+            command = self._submit_button_func,
+            state="disabled"
         )
         self.submit_button.grid(row=1, column=1, sticky="nsew")
-        
-        self.w.bind("<Return>", lambda event: self._submit_button_func())
         
         self.w.columnconfigure(0, weight=20)
         self.w.columnconfigure(1, weight=1)
         
         self.entry_box.focus_set()
-        
-        self._print_to_box("Loading GLaDOS, please wait...")
+
+        self.mq = None
         self.w.after(200, self._create_message_queue)
         
         self.w.mainloop()
@@ -102,8 +103,10 @@ class MainWindow:
     
     def _create_message_queue(self):
         self.mq = MessageQueue(print_func = self._print_to_box)
-        self._print_to_box("All systems ready.")
+        self.w.title(self.title)
         
+        self.w.bind("<Return>", lambda event: self._submit_button_func())
+        self.submit_button.configure(state="normal")
         self.entry_box.configure(state="normal")
     
     def _add_message(self, message: str):
