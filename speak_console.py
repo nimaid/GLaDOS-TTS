@@ -29,7 +29,7 @@ class MessageQueue:
         if len(message) == 0:
             return
         
-        self.print_func(f"Adding message: \"{message}\"")
+        self.print_func(f"ADDING: \"{message}\"")
         
         self.message_queue.append(message)
         
@@ -48,11 +48,14 @@ class MessageQueue:
     def stop_loop(self):
         self.run = False
     
+    def stop_audio(self):
+        self.tts.stop_audio()
+    
     def _process_message(self):
         message = self.message_queue[0]
         self.message_queue = self.message_queue[1:]
         
-        self.print_func(f"Reading message: \"{message}\"")
+        self.print_func(f"READING: \"{message}\"")
         self.tts.speak_text_aloud(message)
     
     def _message_loop(self):
@@ -91,6 +94,8 @@ class MainWindow:
         
         self.mq = MessageQueue(print_func = self._print_to_box)
         
+        self.w.bind('<Destroy>', lambda event: self._cleanup())
+        
         self.w.mainloop()
     
     def _add_message(self, message: str):
@@ -108,6 +113,10 @@ class MainWindow:
         self.text_box.insert("end", f"{text}\n")
         self.text_box.see("end")
         self.text_box.configure(state="disabled")
+    
+    def _cleanup(self):
+        self.mq.stop_loop()
+        self.mq.stop_audio()
 
 
 def main():
@@ -115,4 +124,3 @@ def main():
     
 
 main()
-

@@ -178,6 +178,9 @@ class Synthesizer:
         self.speak_text_aloud_async(text, normalize=normalize)
         sd.wait()
     
+    def stop_audio(self):
+        sd.stop()
+    
     def _normalize_text(self, text: str) -> str:
         processed_text = re.sub(r"(\d+)", lambda x: num2words.num2words(int(x.group(0))), text)
         
