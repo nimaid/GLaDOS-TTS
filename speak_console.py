@@ -1,3 +1,4 @@
+import os
 import sys
 from typing import Optional, Callable
 import threading
@@ -5,6 +6,25 @@ import time
 import tkinter as tk
 
 import glados
+
+SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
+
+PLATFORM = None
+for plat in [
+    {"search_string": "win", "name_string": "windows"},
+    {"search_string": "linux", "name_string": "linux"},
+    {"search_string": "darwin", "name_string": "macintosh"}
+]:
+    if sys.platform.startswith(plat["search_string"]):
+        PLATFORM = plat["name_string"]
+        break
+if PLATFORM is None:
+    PLATFORM = "other"
+
+if PLATFORM == "windows":
+    ICON_FILE = os.path.realpath(os.path.join(SCRIPT_DIR, "icon.ico"))
+else:
+    ICON_FILE = None
 
 
 class MessageQueue:
@@ -70,7 +90,8 @@ class MainWindow:
     def __init__(self):
         self.w = tk.Tk()
         self.title = "GLaDOS TTS Engine"
-        self.w.iconbitmap("icon.ico")
+        if ICON_FILE is not None:
+            self.w.iconbitmap(ICON_FILE)
         
         self.w.title(f"{self.title} (loading, please wait...)")
         self.w.resizable(width=False, height=False)
