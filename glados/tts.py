@@ -182,7 +182,12 @@ class Synthesizer:
         sd.stop()
     
     def _normalize_text(self, text: str) -> str:
-        processed_text = re.sub(r"(\d+)", lambda x: num2words.num2words(int(x.group(0))), text)
+        
+        # Replace decimal points with the word "point"
+        processed_text = re.sub(r"([^\s\.]*)\.([^\s\.]+)", lambda x: f"{x.group(1)} point {x.group(2)}", text)
+        
+        # Replace numbers with words
+        processed_text = re.sub(r"(\d+)", lambda x: num2words.num2words(int(x.group(0))), processed_text)
         
         return processed_text
     
