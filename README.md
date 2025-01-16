@@ -63,7 +63,7 @@ import glados  # Import the local module
 # Create a reusable text-to-speech object (this will take some time to load the AI models)
 tts = glados.TTS()
 
-# Say some text, wait 1 second, and then move on to the next line of code
+# Say some text, delay 1 second, and then move on to the next line of code
 # If the speech is longer than 1 second, it will continue in the background
 tts.speak_text_aloud_async("Calcium is a soft, silvery-white metal and one of the most abundant elements on Earth. It is essential for living organisms, playing a critical role in building strong bones and teeth, as well as aiding muscle function and nerve signaling. Calcium is commonly found in compounds like limestone and is extracted for use in construction materials, such as cement and plaster. It also has industrial applications, including acting as a reducing agent in metal production. In everyday life, dietary calcium is obtained from foods like milk, cheese, leafy greens, and fortified products to support overall health.")
 time.sleep(1)
