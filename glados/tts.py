@@ -182,7 +182,6 @@ class Synthesizer:
         sd.stop()
     
     def _normalize_text(self, text: str) -> str:
-        
         # Replace decimal points with the word "point"
         processed_text = re.sub(r"([^\s\.]*)\.([^\s\.]+)", lambda x: f"{x.group(1)} point {x.group(2)}", text)
         
