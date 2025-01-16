@@ -28,9 +28,19 @@ else:
     ICON_FILE = None
 
 DEFAULT_GREETING = "Hello, and welcome to the Aperture Science Interactive Text-To-Speech Console."
+DEFAULT_DELAY = 0.5
 
 
 # Parse arguments
+def positive_nonzero_float(value):
+    try:
+        value = float(value)
+        if value <= 0:
+            raise argparse.ArgumentTypeError("{} is not a positive float".format(value))
+    except ValueError:
+        raise Exception("{} is not a float".format(value))
+    return value
+
 def parse_args(args):
     parser = argparse.ArgumentParser(
         description=f"A simple GUI program to speak text in GLaDOS's voice.\n\n",
@@ -43,6 +53,9 @@ def parse_args(args):
     parser.add_argument("-ng", "--no-greet", dest="no_greet", action='store_true',
                         help="if a greeting message should be played"
                         )
+    parser.add_argument("-d", "--delay", dest="delay", type=positive_nonzero_float, required=False, default=DEFAULT_DELAY,
+                        help="the delay between messages"
+                        )
 
     parsed_args = parser.parse_args(args)
 
@@ -52,7 +65,7 @@ def parse_args(args):
 class MessageQueue:
     def __init__(
         self,
-        delay: Optional[float] = 0.5,
+        delay: Optional[float] = DEFAULT_DELAY,
         print_func: Optional[Callable[[str], None]] = print
     ):
         self.delay = delay
@@ -117,8 +130,13 @@ class MessageQueue:
 
 
 class MainWindow:
-    def __init__(self, greeting: Optional[str] = None):
+    def __init__(
+        self,
+        greeting: Optional[str] = None,
+        delay: Optional[float] = DEFAULT_DELAY
+    ):
         self.greeting = greeting
+        self.delay = delay
         
         self.w = tk.Tk()
         self.title = "GLaDOS TTS Engine"
@@ -157,7 +175,7 @@ class MainWindow:
         self._cleanup()
     
     def _create_message_queue(self):
-        self.mq = MessageQueue(print_func = self._print_to_box)
+        self.mq = MessageQueue(print_func = self._print_to_box, delay = self.delay)
         self.w.title(self.title)
         
         self.w.bind("<Return>", lambda event: self._submit_button_func())
@@ -198,7 +216,7 @@ def main(args):
     else:
         greeting = parsed_args.greeting
     
-    mw = MainWindow(greeting=greeting)
+    mw = MainWindow(greeting = greeting, delay = parsed_args.delay)
     
 
 def run():
