@@ -105,7 +105,7 @@ class MainWindow:
         self.w.title(f"{self.title} (loading, please wait...)")
         self.w.resizable(width=False, height=False)
         
-        self.text_box = tk.Text(self.w, state="disabled", fg="white", bg="black")
+        self.text_box = tk.Text(self.w, state="disabled", fg="white", bg="black", wrap=tk.WORD)
         self.text_box.grid(row=0, column=0, columnspan=2, sticky="nsew")
         
         self.entry_box = tk.Entry(self.w, state="disabled")
