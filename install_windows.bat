@@ -36,7 +36,7 @@ goto END
 
 :CONDAFOUND
 echo Conda is already installed!
-FOR /F "tokens=*" %a in ('where conda') do SET CONDAPATH=%a
+set CONDAPATH=conda
 goto ENDCONDA
 
 :ENDCONDA
