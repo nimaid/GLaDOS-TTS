@@ -3,6 +3,7 @@ import sys
 from typing import Optional, Callable
 import threading
 import time
+import argparse
 import tkinter as tk
 
 import glados
@@ -26,11 +27,32 @@ if PLATFORM == "windows":
 else:
     ICON_FILE = None
 
+DEFAULT_GREETING = "Hello, and welcome to the Aperture Science Interactive Text-To-Speech Console."
+
+
+# Parse arguments
+def parse_args(args):
+    parser = argparse.ArgumentParser(
+        description=f"A simple GUI program to speak text in GLaDOS's voice.\n\n",
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    
+    parser.add_argument("-g", "--greeting", dest="greeting", type=str, required=False, default=DEFAULT_GREETING,
+                        help="the greeting message to play when the program starts"
+                        )
+    parser.add_argument("-ng", "--no-greet", dest="no_greet", action='store_true',
+                        help="if a greeting message should be played"
+                        )
+
+    parsed_args = parser.parse_args(args)
+
+    return parsed_args
+
 
 class MessageQueue:
     def __init__(
         self,
-        delay: Optional[float] = 1.0,
+        delay: Optional[float] = 0.5,
         print_func: Optional[Callable[[str], None]] = print
     ):
         self.delay = delay
@@ -92,11 +114,12 @@ class MessageQueue:
             all_messages += f">> \"{message}\"\n"
         
         self.print_func(all_messages)
-    
 
 
 class MainWindow:
-    def __init__(self):
+    def __init__(self, greeting: Optional[str] = None):
+        self.greeting = greeting
+        
         self.w = tk.Tk()
         self.title = "GLaDOS TTS Engine"
         if ICON_FILE is not None:
@@ -138,6 +161,9 @@ class MainWindow:
         self.w.bind("<Return>", lambda event: self._submit_button_func())
         self.submit_button.configure(state="normal")
         self.entry_box.configure(state="normal")
+        
+        if self.greeting is not None:
+            self._add_message(self.greeting)
     
     def _add_message(self, message: str):
         self.mq.add(message)
@@ -161,8 +187,18 @@ class MainWindow:
         self.mq.stop_audio()
 
 
-def main():
-    mw = MainWindow()
+def main(args):
+    parsed_args = parse_args(args)
+    
+    if parsed_args.no_greet:
+        greeting = None
+    else:
+        greeting = parsed_args.greeting
+    
+    mw = MainWindow(greeting=greeting)
     
 
-main()
+def run():
+    main(sys.argv[1:])
+
+run()
