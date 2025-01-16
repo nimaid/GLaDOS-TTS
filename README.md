@@ -8,7 +8,7 @@ import glados
 tts = glados.TTS()
 tts.speak_text_aloud("Hello, World!")
 ```
-Find more usage options [here](https://github.com/nimaid/GLaDOS-TTS#Usage)!
+Find more usage options [here](#Usage)!
 
 # Installation
 
