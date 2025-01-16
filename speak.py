@@ -24,8 +24,10 @@ def parse_args(args):
 def main(args):
     parsed_args = parse_args(args)
     
+    print("Loading models...")
     tts = glados.TTS()
     
+    print("Generating speech...")
     tts.speak_text_aloud(parsed_args.text)
 
 
