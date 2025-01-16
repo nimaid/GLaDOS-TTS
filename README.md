@@ -37,15 +37,25 @@ Find more usage options [here](#Usage)!
 
 # Usage
 
-## From An Interactive Console
-This is the suggested way to quickly generate messages. After it loads the models, it is actually very fast. It usually takes less than a quarter of a second to generate a message.
+## From An Interactive GUI
+This is the suggested way to quickly generate messages. After it loads the models, it is actually very fast. It usually takes a fraction of a second to generate a message.
+
 `conda run -n glados python speak_console.py`
+
+There is a fixed delay between messages. By default this is `0.5` seconds, but you can change it with the `-d`/`--delay` parameter.
+
+There is an automatic greeting message that plays on startup. You can change this with the `-g`/`--greeting` parameter.
+
+You can also completely disable the greeting message wit the `-ng`/`--no-greet` flag.
 
 ## From The Command Line
 This has to load the models every single time it runs, so it can be a bit slow.
-`conda run -n glados python speak.py -t "I am reading a message directly from the command line."`
+
+`conda run -n glados python speak.py -t "Hello, command line!"`
 
 ## In Custom Code
+Below is a more comprehensive example of using the module in your own code.
+
 ```python
 import time  # For making delays
 import glados  # Import the local module
