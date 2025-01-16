@@ -50,7 +50,7 @@ FOR /F "tokens=*" %%g IN ('conda env list ^| findstr /R /C:"%ENVNAME%"') do (set
 if defined ENVDETECT goto ALREADYINSTALLED
 
 echo Installing the conda environment...
-call conda env create -f environment_cuda.yml
+call %USERPROFILE%\Miniconda3\condabin\conda env create -f environment_cuda.yml
 if errorlevel 1 goto INSTALLENVFAIL
 
 echo Conda environment installed!
@@ -58,11 +58,11 @@ goto ENVEND
 
 :INSTALLENVFAIL
 rmdir %USERPROFILE%\Miniconda3\envs\%ENVNAME% /s /q 2> nul
-echo The LPHK build environment could not be installed!
+echo The conda environment could not be installed!
 goto END
 
 :ALREADYINSTALLED
-echo Conda environment is already installed!
+echo The conda environment is already installed!
 goto ENVEND
 
 :ENVEND
