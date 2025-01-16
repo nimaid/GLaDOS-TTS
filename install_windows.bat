@@ -31,7 +31,7 @@ goto ENDCONDA
 
 :CONDAERROR
 echo Miniconda3 install failed!
-exit /B 1
+goto END
 
 :CONDAFOUND
 echo Conda is already installed!
@@ -59,7 +59,7 @@ goto ENVEND
 :INSTALLENVFAIL
 rmdir %USERPROFILE%\Miniconda3\envs\%ENVNAME% /s /q 2> nul
 echo The LPHK build environment could not be installed!
-goto ENVEND
+goto END
 
 :ALREADYINSTALLED
 echo Conda environment is already installed!
@@ -110,6 +110,7 @@ goto MODELEND
 
 :MODELERROR
 echo Some models failed to download. Please try again later or manually download them.
+goto END
 
 :MODELEND
 
