@@ -19,34 +19,20 @@ Find more usage options [here](#Usage)!
    3.  Download the required model files if not already present
 2. Run the interactive console demo with `run_console_windows.bat`
 
-## Linux
+## Linux / Mac
 1. Install [Miniconda](https://www.anaconda.com/download/success) if you do not have `conda` already installed.
-   - [64-Bit x86](https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh)
-   - [64-Bit ARM64](https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh)
+   - Linux
+      - [64-Bit x86](https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh)
+      - [64-Bit ARM64](https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh)
+   - Mac
+      - [64-Bit x86 (Intel)](https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.pkg)
+      - [64-Bit ARM64 (Apple)](https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.pkg)
 2. Install the Conda environment with one of the following commands:
    - GPU accelerated: `conda env create -f environment_cuda.yaml`
    - CPU only: `conda env create -f environment.yaml`
-3. Download the required models with `download_models_ubuntu.bash`
-4. Run the interactive console demo with `conda run -n glados python speak_console.py`
-
-## Mac
-1. Install [Miniconda](https://www.anaconda.com/download/success) if you do not have `conda` already installed.
-   - [64-Bit x86 (Intel)](https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.pkg)
-   - [64-Bit ARM64 (Apple)](https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.pkg)
-2. Install the Conda environment with one of the following commands:
-   - GPU accelerated: `conda env create -f environment_cuda.yaml`
-   - CPU only: `conda env create -f environment.yaml`
-3. Download the required models with `download_models_mac.command`
-4. Run the interactive console demo with `conda run -n glados python speak_console.py`
-
-## Generic Conda
-1. Install [Miniconda](https://www.anaconda.com/download/success) for your operating system if you do not have `conda` already installed.
-2. Install the Conda environment with one of the following commands:
-   - GPU accelerated: `conda env create -f environment_cuda.yaml`
-   - CPU only: `conda env create -f environment.yaml`
-3. Download the required models and place them in `glados/models/`
-   - [glados.onnx](https://github.com/dnhkng/GlaDOS/releases/download/0.1/glados.onnx)
-   - [phomenizer_en.onnx](https://github.com/dnhkng/GlaDOS/releases/download/0.1/phomenizer_en.onnx)
+3. Download the required models with one of the following commands:
+   - Linux: `download_models_ubuntu.bash`
+   - Mac: `download_models_mac.command`
 4. Run the interactive console demo with `conda run -n glados python speak_console.py`
 
 # Usage
