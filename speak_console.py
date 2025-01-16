@@ -150,7 +150,9 @@ class MainWindow:
         self.mq = None
         self.w.after(200, self._create_message_queue)
         
+        self.running = True
         self.w.mainloop()
+        self.running = False
         
         self._cleanup()
     
@@ -176,11 +178,12 @@ class MainWindow:
         self.entry_box.focus_set()
     
     def _print_to_box(self, text: str):
-        self.text_box.configure(state="normal")
-        self.text_box.delete("1.0", "end")
-        self.text_box.insert("end", f"{text}\n")
-        self.text_box.see("end")
-        self.text_box.configure(state="disabled")
+        if self.running:
+            self.text_box.configure(state="normal")
+            self.text_box.delete("1.0", "end")
+            self.text_box.insert("end", f"{text}\n")
+            self.text_box.see("end")
+            self.text_box.configure(state="disabled")
     
     def _cleanup(self):
         self.mq.stop_loop()
