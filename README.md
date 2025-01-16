@@ -5,9 +5,9 @@
 
 ## Windows
 1. Install with `install_windows.bat`. This should automatically:
-  - Install Miniconda if you don't already have a `conda` binary
-  - Install the Conda environment (with CUDA and CuDNN!)
-  - Download the required model files
+  1. Install Miniconda if you don't already have a `conda` binary
+  2. Install the Conda environment (with CUDA and CuDNN!)
+  3. Download the required model files
 2. Run the interactive console demo with `run_console_windows.bat`
 
 ## Linux
