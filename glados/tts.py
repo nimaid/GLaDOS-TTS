@@ -188,6 +188,17 @@ class Synthesizer:
         # Replace numbers with words
         processed_text = re.sub(r"(\d+)", lambda x: num2words.num2words(int(x.group(0))), processed_text)
         
+        # Perform simple replacements
+        replacements = [
+            { "find": "%", "replace": " percent " },
+            { "find": "/", "replace": " slash " },
+        ]
+        for replacement in replacements:
+            processed_text = processed_text.replace(replacement["find"], replacement["replace"])
+        
+        # Normalize spacing
+        processed_text = re.sub(' +', ' ', processed_text)
+        
         return processed_text
     
     def _phonemizer(self, input_text: str) -> List[str]:
