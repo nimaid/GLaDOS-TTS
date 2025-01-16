@@ -1,8 +1,10 @@
 name: glados
 channels:
-  - defaults
+  - conda-forge
 dependencies:
-  - python=3.12.8
+  - python>=3.12.8
+  - cudatoolkit
+  - cudnn
   - pip
   - pip:
     - -r requirements_cuda.txt
