@@ -27,6 +27,7 @@ if not exist "%MINICONDAPATH%\" (goto CONDAERROR)
 if errorlevel 1 goto CONDAERROR
 
 echo Miniconda3 has been installed!
+set CONDAPATH=%USERPROFILE%\Miniconda3\condabin\conda
 goto ENDCONDA
 
 :CONDAERROR
@@ -35,6 +36,7 @@ goto END
 
 :CONDAFOUND
 echo Conda is already installed!
+FOR /F "tokens=*" %a in ('where conda') do SET CONDAPATH=%a
 goto ENDCONDA
 
 :ENDCONDA
@@ -50,7 +52,7 @@ FOR /F "tokens=*" %%g IN ('conda env list ^| findstr /R /C:"%ENVNAME%"') do (set
 if defined ENVDETECT goto ALREADYINSTALLED
 
 echo Installing the conda environment...
-call %USERPROFILE%\Miniconda3\condabin\conda env create -f environment_cuda.yml
+call %CONDAPATH% env create -f environment_cuda.yml
 if errorlevel 1 goto INSTALLENVFAIL
 
 echo Conda environment installed!
