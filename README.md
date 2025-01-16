@@ -64,7 +64,7 @@ import glados  # Import the local module
 tts = glados.TTS()
 
 # Say some text, delay 1 second, and then move on to the next line of code
-# If the speech is longer than 1 second, it will continue in the background until interrupted
+# If the speech is longer than 1 second, it will continue in the background until it ether finishes or is interrupted
 tts.speak_text_aloud_async("Calcium is a soft, silvery-white metal and one of the most abundant elements on Earth.")
 time.sleep(1)
 
