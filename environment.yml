@@ -2,7 +2,7 @@ name: glados
 channels:
   - conda-forge
 dependencies:
-  - python=>3.12.8
+  - python>=3.12.8
   - pip
   - pip:
     - -r requirements.txt
