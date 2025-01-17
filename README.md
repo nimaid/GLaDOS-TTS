@@ -45,7 +45,7 @@ If you just want to quickly make some GLaDOS TTS speech and don't really care ab
 ## From An Interactive GUI
 <p align="center"><img src="splash.png" alt="Interactive Console Splash Screen"/></p>
 
-(You can get this a portable `.exe` file for Windows [here](https://github.com/nimaid/GLaDOS-TTS/releases/latest).)
+You can get this a portable `.exe` file for Windows [here](https://github.com/nimaid/GLaDOS-TTS/releases/latest).
 
 This is the suggested way to quickly generate messages. After it loads the models, it is actually very fast. It usually takes a fraction of a second to generate a message.
 
