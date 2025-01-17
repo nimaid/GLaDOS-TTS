@@ -8,6 +8,15 @@ import tkinter as tk
 
 import glados
 
+# Test if this is a PyInstaller executable or a .py file
+if getattr(sys, 'frozen', False):
+    IS_EXE = True
+    
+    import pyi_splash
+    pyi_splash.close()
+else:
+    IS_EXE = False
+
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 PLATFORM = None
