@@ -153,13 +153,21 @@ class MainWindow:
             self.w.iconbitmap(ICON_FILE)
         
         self.w.title(f"{self.title} (loading, please wait...)")
-        self.w.resizable(width=False, height=False)
+        self.w.geometry('700x400')
+        self.w.resizable(width=True, height=True)
+        self.w.minsize(width=300, height=200)
         
-        self.text_box = tk.Text(self.w, state="disabled", fg="white", bg="black", wrap=tk.WORD)
-        self.text_box.grid(row=0, column=0, columnspan=2, sticky="nsew")
+        self.text_box = tk.Text(
+            self.w,
+            state="disabled",
+            fg="white", bg="black",
+            wrap=tk.WORD,
+            width=1, height=1
+        )
+        self.text_box.pack(side="top", fill="both", expand=True)
         
         self.entry_box = tk.Entry(self.w, state="disabled")
-        self.entry_box.grid(row=1, column=0, sticky="nesw")
+        self.entry_box.pack(side="left", fill="x", expand=True)
         
         self.submit_button = tk.Button(
             self.w,
@@ -167,7 +175,7 @@ class MainWindow:
             command = self._submit_button_func,
             state="disabled"
         )
-        self.submit_button.grid(row=1, column=1, sticky="nsew")
+        self.submit_button.pack(side="left")
         
         self.w.columnconfigure(0, weight=20)
         self.w.columnconfigure(1, weight=1)
