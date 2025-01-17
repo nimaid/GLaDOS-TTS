@@ -1,81 +1,109 @@
 @echo off
 
-REM Install Miniconda (if conda is not already installed)
-set MINICONDAPATH=%USERPROFILE%\Miniconda3
-set CONDAEXE=%TEMP%\%RANDOM%-%RANDOM%-%RANDOM%-%RANDOM%-condainstall.exe
-set "OS="
-set "MCLINK="
+:: Enable delayed expansion for working with variables inside loops
+setlocal enabledelayedexpansion
 
-where conda >nul 2>nul
-if %ERRORLEVEL% EQU 0 goto CONDAFOUND
+echo Testing for existing CUDA installation...
+nvcc --version >nul 2>nul
+if !errorlevel! EQU 0 (
+    echo Found existing CUDA installation^!
 
-:INSTALLCONDA
-reg Query "HKLM\Hardware\Description\System\CentralProcessor\0" | find /i "x86" > NUL && set OS=32BIT || set OS=64BIT
-if %OS%==32BIT set MCLINK=https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86.exe
-if %OS%==64BIT set MCLINK=https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe
+    echo Creating virtual environment ^(uv^)...
+    pip install uv
+    uv self update
+    uv venv --python 3.12.8
+    call  .venv\Scripts\activate
+    uv pip install -r requirements_cuda.txt
 
-echo Downloading Miniconda3 (This will take while, please wait)...
-powershell -Command "(New-Object Net.WebClient).DownloadFile('%MCLINK%', '%CONDAEXE%')" >nul 2>nul
-if errorlevel 1 goto CONDAERROR
+    echo Installing requirements-cuda.txt...
+    uv pip install -r requirements_cuda.txt
+) else (
+    echo Could not find CUDA^!
+    echo.
+    :INSTALL_PROMPT
+    echo You may choose from several installation methods:
+    echo.
+    echo 1. CPU only [Universal]
+    echo 2. CUDA accelerated [Nvidia]
+    set /p install_choice= Please enter your desired install option: 
+    echo !install_choice!
+    if "!install_choice!"=="1" (
+        echo Installing CPU only [Universal].
+        
+        echo Checking for pip...
+        where pip >nul 2>nul
+        if !errorlevel! EQU 0 (
+            echo Found existing pip^!
+            
+            echo Creating virtual environment ^(uv^)...
+            pip install uv
+            uv self update
+            uv venv --python 3.12.8
+            call  .venv\Scripts\activate
+            uv pip install -r requirements_cuda.txt
 
-echo Installing Miniconda3 (This will also take a while, please wait)...
-start /wait /min "Installing Miniconda3..." "%CONDAEXE%" /InstallationType=JustMe /S /D="%MINICONDAPATH%"
-del "%CONDAEXE%"
-if not exist "%MINICONDAPATH%\" (goto CONDAERROR)
+            echo Installing requirements.txt...
+            uv pip install -r requirements.txt
+            goto DOWNLOAD_MODELS
+        ) else (
+            echo Could not find pip^!
+        )
+    ) else if "!install_choice!"=="2" (
+        echo Installing CUDA accelerated [Nvidia].
+    ) else (
+        echo Invalid option.
+        echo.
+        goto INSTALL_PROMPT
+    )
 
-"%MINICONDAPATH%\Scripts\conda.exe" init
-if errorlevel 1 goto CONDAERROR
+    echo Checking if conda is already installed...
+    where conda >nul 2>nul
+    if !errorlevel! EQU 0 (
+        echo Conda is already installed^!
+        set CONDA_PATH=conda
+    ) else (
+        echo Could not find conda^!
+        
+       if not exist install_conda_windows.bat (
+            curl -L https://gist.githubusercontent.com/nimaid/a7d6d793f2eba4020135208a57f5c532/raw/9ac639724c27f4be671fb0923fd13267434a0bec/install_conda.bat -o install_conda_windows.bat
+        )
+        call install_conda_windows.bat
+        del install_conda_windows.bat
+        if errorlevel 1 goto CONDA_ERROR
 
-echo Miniconda3 has been installed!
-set CONDAPATH=%USERPROFILE%\Miniconda3\condabin\conda
-goto ENDCONDA
+        set "CONDA_PATH=%USERPROFILE%\Miniconda3\Scripts\conda.exe"
+    )
+    
+    echo Cheking if virtual environment is already installed...
+    FOR /F "tokens=*" %%g IN ('conda env list ^| findstr /R /C:"glados"') do (set env_installed="%%g")
+    if defined env_installed (
+        echo Virtual environment already installed.
+        goto DOWNLOAD_MODELS
+    )
+    
+    echo Virtual environment not installed^!
+    
+    echo Creating virtual environment ^(conda^)...
+    if "!install_choice!"=="1" (
+        call "!CONDA_PATH!" env create -f environment.yml
+    ) else if "!install_choice!"=="2" (
+        call "!CONDA_PATH!" env create -f environment_cuda.yml
+    )
+    if !errorlevel! EQU 1 goto ENV_ERROR
+)
+goto DOWNLOAD_MODELS
 
-:CONDAERROR
+:CONDA_ERROR
 echo Miniconda3 install failed!
 goto END
 
-:CONDAFOUND
-echo Conda is already installed!
-set CONDAPATH=conda
-goto ENDCONDA
-
-:ENDCONDA
-
-
-
-REM Install the conda environment (if not already installed)
-set "ENVNAME=glados"
-set "ENVDETECT="
-
-:INSTALLENV
-FOR /F "tokens=*" %%g IN ('conda env list ^| findstr /R /C:"%ENVNAME%"') do (set ENVDETECT="%%g")
-if defined ENVDETECT goto ALREADYINSTALLED
-
-echo Installing the conda environment...
-call %CONDAPATH% env create -f environment_cuda.yml
-if errorlevel 1 goto INSTALLENVFAIL
-
-echo Conda environment installed!
-goto ENVEND
-
-:INSTALLENVFAIL
-rmdir %USERPROFILE%\Miniconda3\envs\%ENVNAME% /s /q 2> nul
-echo The conda environment could not be installed!
+:ENV_ERROR
+echo Environment install failed!
 goto END
 
-:ALREADYINSTALLED
-echo The conda environment is already installed!
-goto ENVEND
-
-:ENVEND
-
-
-
+:DOWNLOAD_MODELS
 REM Download and the required models (if not already downloaded)
 echo Verifying and downloading required models...
-
-:: Enable delayed expansion for working with variables inside loops
-setlocal enabledelayedexpansion
 
 :: Define the list of files with their URLs and local paths
 :: Removed quotes around the entire string and fixed paths
