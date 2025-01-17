@@ -55,9 +55,9 @@ To run the installed version:
 
 `conda run -n glados python speak_console.py`
 
-There is a fixed delay between messages. By default this is `0.5` seconds, but you can change it with the `-d`/`--delay` parameter.
+There is a fixed delay between messages. By default this is `0.5` seconds, but you can change it with the `-d`/`--delay` parameter followed by the number of seconds you'd like the delay to be.
 
-There is an automatic greeting message that plays on startup. You can change this with the `-g`/`--greeting` parameter.
+There is an automatic greeting message that plays on startup. You can change this with the `-g`/`--greeting` parameter followed by your greeting message.
 
 You can also completely disable the greeting message with the `-ng`/`--no-greet` flag.
 
