@@ -16,10 +16,10 @@ Find more usage options [here](#Usage)!
 # Installation
 
 ## Windows
-### Portable TTS Console (CPU)
+### Pre-Built Portable Executables (CPU only)
 If you just want to quickly make some GLaDOS TTS speech and don't really care about writing custom code, simply download the latest portable builds [here](https://github.com/nimaid/GLaDOS-TTS/releases/latest). All you have to do is download and run your preferred `.exe` file!
 
-### Full Installation (CPU/CUDA)
+### Full Installation (choice of either CPU only or CUDA acceleration)
 1. Install with `install_windows.bat`. This should automatically:
    1. Install Miniconda if you don't already have a `conda` binary
    2.  Install the Conda environment (with CUDA and CuDNN!)
