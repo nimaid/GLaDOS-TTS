@@ -8,6 +8,7 @@ import numpy as np
 import onnxruntime as ort
 
 import sounddevice as sd
+import wave
 
 import re
 import num2words
@@ -154,7 +155,10 @@ class Synthesizer:
         with path.open("rb") as f:
             return load(f)
 
-    def generate_speech_audio(self, text: str) -> np.ndarray:
+    def generate_speech_audio(self, text: str, normalize: Optional[bool] = True) -> np.ndarray:
+        if normalize:
+            text = self._normalize_text(text)
+        
         phonemes = self._phonemizer(text)
         audio = self.say_phonemes(phonemes)
         return audio
@@ -169,17 +173,31 @@ class Synthesizer:
         return np.array([])
 
     def speak_text_aloud_async(self, text: str, normalize: Optional[bool] = True):
-        if normalize:
-            text = self._normalize_text(text)
-        audio = self.generate_speech_audio(text)
-        sd.play(audio, self.rate)
+        audio = self.generate_speech_audio(text, normalize=normalize)
+        self.play_audio_async(audio)
     
     def speak_text_aloud(self, text: str, normalize: Optional[bool] = True):
-        self.speak_text_aloud_async(text, normalize=normalize)
+        audio = self.generate_speech_audio(text, normalize=normalize)
+        self.play_audio(audio)
+    
+    def play_audio_async(self, audio: np.ndarray):
+        sd.play(audio, self.rate)
+    
+    def play_audio(self, audio: np.ndarray):
+        self.play_audio_async(audio)
         sd.wait()
     
     def stop_audio(self):
         sd.stop()
+    
+    def save_wav(self, audio: np.ndarray, filename: str):
+        with wave.open(filename, "wb") as f:
+            nchannels = 1 if audio.ndim == 1 else audio.shape[1]
+            sampwidth = 2
+            f.setparams((nchannels, sampwidth, self.rate, len(audio), "NONE", "not compressed"))
+            
+            audio = (audio * 32767).astype(np.int16)
+            f.writeframes(audio.tobytes())
     
     def _normalize_text(self, text: str) -> str:
         # Replace decimal points with the word "point"

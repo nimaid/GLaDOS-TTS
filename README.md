@@ -93,5 +93,11 @@ tts.speak_text_aloud("Hello, and thank you, world.")
 tts.stop_audio()
 
 # Generate audio to a Numpy array
-speech_audio = tts.generate_speech_audio("Wow, my voice is now stored directly in your random access memory.")
+audio = tts.generate_speech_audio("Wow, my voice is now stored directly in your random access memory.")
+
+# Play the generated audio back
+tts.play_audio(audio)
+
+# Save the generated audio as a wave file
+tts.save_wav(audio, "example.wav")
 ```
