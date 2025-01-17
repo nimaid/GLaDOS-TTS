@@ -101,7 +101,11 @@ tts.stop_audio()
 # Generate audio to a Numpy array
 audio = tts.generate_speech_audio("Wow, my voice is now stored directly in your random access memory.")
 
-# Play the generated audio back
+# Play the generated audio back, delay 1 second, and then move on to the next line of code
+tts.play_audio_async(audio)
+time.sleep(1)
+
+# Restart the audio playback and wait until it's done this time.
 tts.play_audio(audio)
 
 # Save the generated audio as a wave file
