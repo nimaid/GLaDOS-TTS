@@ -15,7 +15,7 @@ Find more usage options [here](#Usage)!
 
 ## Windows
 ### Portable TTS Console (CPU)
-If you just want to quickly make some GLaDOS TTS speech and don't really care about writing custom code, simply [download the latest portable build here](https://github.com/nimaid/GLaDOS-TTS/releases/latest)!
+If you just want to quickly make some GLaDOS TTS speech and don't really care about writing custom code, simply download the latest portable build  [here](https://github.com/nimaid/GLaDOS-TTS/releases/latest). All you have to do is run the `.exe` file!
 
 ### Full Installation (CPU/CUDA)
 1. Install with `install_windows.bat`. This should automatically:
