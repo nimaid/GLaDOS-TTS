@@ -143,8 +143,7 @@ echo Some models failed to download. Please try again later or manually download
 goto END
 
 :MODELEND
-
-
+echo Installation finished!
 
 REM End of script
 :END
