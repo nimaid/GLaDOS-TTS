@@ -22,7 +22,7 @@ If you just want to quickly make some GLaDOS TTS speech and don't really care ab
 ### Full Installation (CPU only or CUDA accelerated)
 1. Install with `install_windows.bat`. This should automatically:
    1. Install Miniconda if you don't already have `pip` or a `conda` binary
-   2. Install the Conda environment (with CUDA and CuDNN if you want!)
+   2. Install the virtual environment (with CUDA and CuDNN if you want!)
    3. Download the required model files if not already present
 2. Run the interactive console demo with `run_console_windows.bat`
 
