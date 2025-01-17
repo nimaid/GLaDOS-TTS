@@ -1,4 +1,4 @@
-# GLaDOS Text-To-Speech Module
+# GLaDOS Text-To-Speech Engine
 [Adapted from dnhkng's GLaDOS repository.](https://github.com/dnhkng/GlaDOS)
 
 <p align="center"><img src="engine.png" alt="Interactive Console Splash Screen"/></p>
