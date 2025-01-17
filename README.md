@@ -72,7 +72,7 @@ This has to load the models every single time it runs, so it can be a bit slow.
 
 You can optionally choose to save to a `.wav` file with the `-o`/`--output` parameter followed by the desired filename.
 
-If you want to avoid reading the text aloud, use the `-q`/`--quiet` flag. This is useful when you just want to make a `.wav` file with the `-o` parameter.
+If you want to prevent text from being read aloud, use the `-q`/`--quiet` flag. This is useful when you just want to make a `.wav` file with the `-o` parameter.
 
 ## In Custom Code
 <p align="center"><img src="tts_module.png" alt="Python Module Splash Screen"/></p>
