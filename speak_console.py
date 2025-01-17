@@ -133,7 +133,7 @@ class MessageQueue:
     def _print_message_queue(self):
         all_messages = ""
         for message in self.message_queue:
-            all_messages += f">> \"{message}\"\n"
+            all_messages += f">> {message}\n"
         
         self.print_func(all_messages)
 
