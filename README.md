@@ -19,11 +19,11 @@ Find more usage options [here](#Usage)!
 ### Pre-Built Portable Executables (CPU only)
 If you just want to quickly make some GLaDOS TTS speech and don't really care about writing custom code, simply download the latest portable builds [here](https://github.com/nimaid/GLaDOS-TTS/releases/latest). All you have to do is download and run your preferred `.exe` file!
 
-### Full Installation (choice of either CPU only or CUDA acceleration)
+### Full Installation (CPU only or CUDA accelerated)
 1. Install with `install_windows.bat`. This should automatically:
-   1. Install Miniconda if you don't already have a `conda` binary
-   2.  Install the Conda environment (with CUDA and CuDNN!)
-   3.  Download the required model files if not already present
+   1. Install Miniconda if you don't already have `pip` or a `conda` binary
+   2. Install the Conda environment (with CUDA and CuDNN if you want!)
+   3. Download the required model files if not already present
 2. Run the interactive console demo with `run_console_windows.bat`
 
 ## Linux / Mac
