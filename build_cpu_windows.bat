@@ -14,7 +14,7 @@ set EXE=%DIST_DIR%\%MAIN_FILE_NAME%.exe
 set TARGET_EXE=%ORIG_DIR%\%MAIN_FILE_NAME%.exe
 
 set ICON_ICO=%ORIG_DIR%\icon.ico
-set SPLASH_IMG=%ORIG_DIR%\splash.png
+set SPLASH_IMG=%ORIG_DIR%\console.png
 
 
 echo Building portable EXE...

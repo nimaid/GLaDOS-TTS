@@ -1,6 +1,8 @@
 # GLaDOS Text-To-Speech Module
 [Adapted from dnhkng's GLaDOS repository.](https://github.com/dnhkng/GlaDOS)
 
+<p align="center"><img src="engine.png" alt="Interactive Console Splash Screen"/></p>
+
 Add the evil robot to your Python project as easy as:
 ```python
 import glados
@@ -43,7 +45,7 @@ If you just want to quickly make some GLaDOS TTS speech and don't really care ab
 # Usage
 
 ## From An Interactive GUI
-<p align="center"><img src="splash.png" alt="Interactive Console Splash Screen"/></p>
+<p align="center"><img src="console.png" alt="Interactive Console Splash Screen"/></p>
 
 You can get this a portable `.exe` file for Windows [here](https://github.com/nimaid/GLaDOS-TTS/releases/latest).
 
@@ -60,11 +62,15 @@ There is an automatic greeting message that plays on startup. You can change thi
 You can also completely disable the greeting message wit the `-ng`/`--no-greet` flag.
 
 ## From The Command Line
+<p align="center"><img src="command.png" alt="Interactive Console Splash Screen"/></p>
+
 This has to load the models every single time it runs, so it can be a bit slow.
 
 `conda run -n glados python speak.py -t "Hello, command line!"`
 
 ## In Custom Code
+<p align="center"><img src="module.png" alt="Interactive Console Splash Screen"/></p>
+
 Below is a more comprehensive example of using the module in your own code.
 
 ```python
