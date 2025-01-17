@@ -45,9 +45,11 @@ goto DONE
 :ERROR
 cd %ORIGDIR%
 echo Portable EXE build failed!
+pause
 exit /B 1
 
 :DONE
 cd %ORIGDIR%
 echo Portable EXE build done!
+pause
 exit /B 0
