@@ -3,7 +3,7 @@
 
 <p align="center"><img src="engine.png" alt="Interactive Console Splash Screen"/></p>
 
-Add the evil robot to your Python project as easy as:
+Add the evil robot from Aperture Laboratories to your Python project as easy as:
 ```python
 import glados
 
