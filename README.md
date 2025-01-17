@@ -8,11 +8,16 @@ import glados
 tts = glados.TTS()
 tts.speak_text_aloud("Hello, World!")
 ```
+
 Find more usage options [here](#Usage)!
 
 # Installation
 
 ## Windows
+### Portable TTS Console (CPU)
+If you just want to quickly make some GLaDOS TTS speech and don't really care about writing custom code, just [download the latest portable build here](https://github.com/nimaid/GLaDOS-TTS/releases/latest)!
+
+### Full Installation (CPU/CUDA)
 1. Install with `install_windows.bat`. This should automatically:
    1. Install Miniconda if you don't already have a `conda` binary
    2.  Install the Conda environment (with CUDA and CuDNN!)
@@ -38,6 +43,7 @@ Find more usage options [here](#Usage)!
 # Usage
 
 ## From An Interactive GUI
+<p align="center"><img src="splash.png" alt="Interactive Console Splash Screen"/></p>
 This is the suggested way to quickly generate messages. After it loads the models, it is actually very fast. It usually takes a fraction of a second to generate a message.
 
 `conda run -n glados python speak_console.py`
