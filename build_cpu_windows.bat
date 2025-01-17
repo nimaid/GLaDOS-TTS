@@ -22,7 +22,7 @@ del /f /s /q "%TARGET_EXE%" 1>nul 2>&1
 call conda run -n %ENV_NAME% pyinstaller ^
     --clean ^
     --noconfirm ^
-    --noconsole ^
+    --windowed ^
     --add-data %ICON_ICO%;. ^
 	--add-data %ORIG_DIR%\glados;.\glados ^
     --onefile ^
