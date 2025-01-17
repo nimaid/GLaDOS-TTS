@@ -11,7 +11,7 @@ def parse_args(args):
     )
 
     parser.add_argument("-t", "--text", dest="text", type=str, required=True,
-                        help="the text to speak aloud"
+                        help="the text to speak"
                         )
     parser.add_argument("-o", "--output", dest="output_file", type=str, required=False, default=None,
                         help="output a wave file"

@@ -164,4 +164,8 @@ cython_debug/
 *.gguf
 *.onnx
 
+# Built portable apps
 *.exe
+
+# Generated files
+*.wav
