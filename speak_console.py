@@ -5,6 +5,7 @@ import threading
 import time
 import argparse
 import tkinter as tk
+import tkinter.filedialog
 
 import glados
 
@@ -81,6 +82,7 @@ class MessageQueue:
         self.print_func = print_func
         
         self.message_queue = []
+        self.audio = None
         
         self.tts = glados.TTS()
         
@@ -118,7 +120,8 @@ class MessageQueue:
     def _process_message(self):
         message = self.message_queue[0]
         
-        self.tts.speak_text_aloud(message)
+        self.audio = self.tts.generate_speech_audio(message)
+        self.tts.play_audio(self.audio)
         
         self.message_queue = self.message_queue[1:]
         self._print_message_queue()
@@ -171,11 +174,27 @@ class MainWindow:
         
         self.submit_button = tk.Button(
             self.w,
-            text = "Submit",
+            text = "Speak",
             command = self._submit_button_func,
             state="disabled"
         )
         self.submit_button.pack(side="left")
+        
+        self.play_button = tk.Button(
+            self.w,
+            text = "Play Last",
+            command = self._play_button_func,
+            state="disabled"
+        )
+        self.play_button.pack(side="left")
+        
+        self.save_button = tk.Button(
+            self.w,
+            text = "Save Last",
+            command = self._save_button_func,
+            state="disabled"
+        )
+        self.save_button.pack(side="left")
         
         self.w.columnconfigure(0, weight=20)
         self.w.columnconfigure(1, weight=1)
@@ -197,6 +216,8 @@ class MainWindow:
         
         self.w.bind("<Return>", lambda event: self._submit_button_func())
         self.submit_button.configure(state="normal")
+        self.play_button.configure(state="normal")
+        self.save_button.configure(state="normal")
         self.entry_box.configure(state="normal")
         
         if self.greeting is not None:
@@ -211,6 +232,18 @@ class MainWindow:
         
         self.entry_box.delete(0, "end")
         self.entry_box.focus_set()
+    
+    def _save_button_func(self):
+        audio = self.mq.audio
+        if self.mq.audio is not None:
+            filename = tk.filedialog.asksaveasfilename(initialfile = 'Untitled.wav', defaultextension=".wav", filetypes=[("WAVE Files","*.wav")])
+            if filename is not None:
+                self.mq.tts.save_wav(audio=audio, filename=filename)
+    
+    def _play_button_func(self):
+        audio = self.mq.audio
+        if self.mq.audio is not None:
+            self.mq.tts.play_audio_async(audio)
     
     def _print_to_box(self, text: str):
         if self.running:
