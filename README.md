@@ -59,7 +59,7 @@ There is a fixed delay between messages. By default this is `0.5` seconds, but y
 
 There is an automatic greeting message that plays on startup. You can change this with the `-g`/`--greeting` parameter.
 
-You can also completely disable the greeting message wit the `-ng`/`--no-greet` flag.
+You can also completely disable the greeting message with the `-ng`/`--no-greet` flag.
 
 ## From The Command Line
 <p align="center"><img src="tts_command.png" alt="Command Line Program Splash Screen"/></p>
