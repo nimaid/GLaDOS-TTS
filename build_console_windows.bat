@@ -2,7 +2,7 @@
 
 set ORIG_DIR=%CD%
 
-set ENV_NAME=glados-cpu
+set ENV_NAME=glados-build
 set MAIN_FILE_NAME=speak_console
 
 set DIST_DIR=%ORIG_DIR%\dist
