@@ -47,6 +47,8 @@ If you just want to quickly make some GLaDOS TTS speech and don't really care ab
 
 This is the suggested way to quickly generate messages. After it loads the models, it is actually very fast. It usually takes a fraction of a second to generate a message.
 
+You can get this a portable `.exe` file for Windows [here](https://github.com/nimaid/GLaDOS-TTS/releases/latest).
+
 `conda run -n glados python speak_console.py`
 
 There is a fixed delay between messages. By default this is `0.5` seconds, but you can change it with the `-d`/`--delay` parameter.
