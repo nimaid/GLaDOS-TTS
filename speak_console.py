@@ -9,16 +9,20 @@ import tkinter.filedialog
 
 import glados
 
+
+SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
+
 # Test if this is a PyInstaller executable or a .py file
 if getattr(sys, 'frozen', False):
     IS_EXE = True
+    PROG_DIR = os.path.dirname(sys.executable)
     
     import pyi_splash
     pyi_splash.close()
 else:
     IS_EXE = False
+    PROG_DIR = SCRIPT_DIR
 
-SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 PLATFORM = None
 for plat in [
@@ -236,8 +240,8 @@ class MainWindow:
     def _save_button_func(self):
         audio = self.mq.audio
         if self.mq.audio is not None:
-            filename = tk.filedialog.asksaveasfilename(initialfile = 'Untitled.wav', defaultextension=".wav", filetypes=[("WAVE Files","*.wav")])
-            if filename is not None:
+            filename = tk.filedialog.asksaveasfilename(initialdir = ".", initialfile = 'Untitled.wav', defaultextension=".wav", filetypes=[("WAVE Files","*.wav")])
+            if filename != "":
                 self.mq.tts.save_wav(audio=audio, filename=filename)
     
     def _play_button_func(self):
