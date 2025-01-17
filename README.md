@@ -17,7 +17,7 @@ Find more usage options [here](#Usage)!
 
 ## Windows
 ### Portable TTS Console (CPU)
-If you just want to quickly make some GLaDOS TTS speech and don't really care about writing custom code, simply download the latest portable build  [here](https://github.com/nimaid/GLaDOS-TTS/releases/latest). All you have to do is run the `.exe` file!
+If you just want to quickly make some GLaDOS TTS speech and don't really care about writing custom code, simply download the latest portable builds [here](https://github.com/nimaid/GLaDOS-TTS/releases/latest). All you have to do is download and run your preferred `.exe` file!
 
 ### Full Installation (CPU/CUDA)
 1. Install with `install_windows.bat`. This should automatically:
@@ -47,7 +47,7 @@ If you just want to quickly make some GLaDOS TTS speech and don't really care ab
 ## From An Interactive GUI
 <p align="center"><img src="tts_console.png" alt="Interactive Console Splash Screen"/></p>
 
-You can get this a portable `.exe` file for Windows [here](https://github.com/nimaid/GLaDOS-TTS/releases/latest).
+You can get this a portable `.exe` file for Windows [here](https://github.com/nimaid/GLaDOS-TTS/releases/latest/download/speak_console.exe).
 
 This is the suggested way to quickly generate messages. After it loads the models, it is actually very fast. It usually takes a fraction of a second to generate a message.
 
@@ -63,6 +63,8 @@ You can also completely disable the greeting message wit the `-ng`/`--no-greet` 
 
 ## From The Command Line
 <p align="center"><img src="tts_command.png" alt="Interactive Console Splash Screen"/></p>
+
+You can get this a portable `.exe` file for Windows [here](https://github.com/nimaid/GLaDOS-TTS/releases/latest/download/speak.exe).
 
 This has to load the models every single time it runs, so it can be a bit slow.
 
