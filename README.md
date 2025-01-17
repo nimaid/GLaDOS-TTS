@@ -3,7 +3,7 @@ Adapted from [dnhkng's GLaDOS repository](https://github.com/dnhkng/GlaDOS).
 
 <p align="center"><img src="engine.png" alt="Interactive Console Splash Screen"/></p>
 
-Add [the evil robot from Aperture Laboratories](https://en.wikipedia.org/wiki/GLaDOS) to your Python project as easy as:
+Add [the evil robot](https://en.wikipedia.org/wiki/GLaDOS) to your Python project as easy as:
 ```python
 import glados
 
