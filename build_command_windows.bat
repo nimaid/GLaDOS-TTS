@@ -13,7 +13,9 @@ set SPEC=%ORIG_DIR%\%MAIN_FILE_NAME%.spec
 set EXE=%DIST_DIR%\%MAIN_FILE_NAME%.exe
 set TARGET_EXE=%ORIG_DIR%\%MAIN_FILE_NAME%.exe
 
-set ICON_ICO=%ORIG_DIR%\icon.ico
+set RESOURCE_DIR=%ORIG_DIR%\resources
+
+set ICON_ICO=%RESOURCE_DIR%\icon.ico
 
 
 echo Building portable EXE...
@@ -21,7 +23,7 @@ del /f /s /q "%TARGET_EXE%" 1>nul 2>&1
 call conda run -n %ENV_NAME% pyinstaller ^
     --clean ^
     --noconfirm ^
-    --add-data %ICON_ICO%;. ^
+    --add-data %ICON_ICO%;.\resources ^
 	--add-data %ORIG_DIR%\glados;.\glados ^
     --onefile ^
     --icon=%ICON_ICO% ^

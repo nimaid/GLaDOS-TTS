@@ -13,8 +13,10 @@ set SPEC=%ORIG_DIR%\%MAIN_FILE_NAME%.spec
 set EXE=%DIST_DIR%\%MAIN_FILE_NAME%.exe
 set TARGET_EXE=%ORIG_DIR%\%MAIN_FILE_NAME%.exe
 
-set ICON_ICO=%ORIG_DIR%\icon.ico
-set SPLASH_IMG=%ORIG_DIR%\tts_console.png
+set RESOURCE_DIR=%ORIG_DIR%\resources
+
+set ICON_ICO=%RESOURCE_DIR%\icon.ico
+set SPLASH_IMG=%RESOURCE_DIR%\tts_console.png
 
 
 echo Building portable EXE...
@@ -23,7 +25,7 @@ call conda run -n %ENV_NAME% pyinstaller ^
     --clean ^
     --noconfirm ^
     --windowed ^
-    --add-data %ICON_ICO%;. ^
+    --add-data %RESOURCE_DIR%;.\resources ^
 	--add-data %ORIG_DIR%\glados;.\glados ^
     --onefile ^
     --splash=%SPLASH_IMG% ^

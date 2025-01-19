@@ -23,6 +23,7 @@ else:
     IS_EXE = False
     PROG_DIR = SCRIPT_DIR
 
+RESOURCE_DIR = os.path.realpath(os.path.join(SCRIPT_DIR, "resources"))
 
 PLATFORM = None
 for plat in [
@@ -37,7 +38,7 @@ if PLATFORM is None:
     PLATFORM = "other"
 
 if PLATFORM == "windows":
-    ICON_FILE = os.path.realpath(os.path.join(SCRIPT_DIR, "icon.ico"))
+    ICON_FILE = os.path.realpath(os.path.join(RESOURCE_DIR, "icon.ico"))
 else:
     ICON_FILE = None
 

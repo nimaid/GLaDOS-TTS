@@ -1,7 +1,7 @@
 # GLaDOS Text-To-Speech Engine
 Adapted from [dnhkng's GLaDOS repository](https://github.com/dnhkng/GlaDOS).
 
-<p align="center"><img src="tts_engine.png" alt="TTS Engine Splash Screen"/></p>
+<p align="center"><img src="resources/tts_engine.png" alt="TTS Engine Splash Screen"/></p>
 
 Add [the evil robot](https://en.wikipedia.org/wiki/GLaDOS) to your Python project as easy as:
 ```python
@@ -45,7 +45,7 @@ If you just want to quickly make some GLaDOS TTS speech and don't really care ab
 # Usage
 
 ## From An Interactive GUI
-<p align="center"><img src="tts_console.png" alt="Interactive Console Splash Screen"/></p>
+<p align="center"><img src="resources/tts_console.png" alt="Interactive Console Splash Screen"/></p>
 
 You can get this a portable `.exe` file for Windows [here](https://github.com/nimaid/GLaDOS-TTS/releases/latest/download/speak_console.exe).
 
@@ -62,7 +62,7 @@ There is an automatic greeting message that plays on startup. You can change thi
 You can also completely disable the greeting message with the `-ng`/`--no-greet` flag.
 
 ## From The Command Line
-<p align="center"><img src="tts_command.png" alt="Command Line Program Splash Screen"/></p>
+<p align="center"><img src="resources/tts_command.png" alt="Command Line Program Splash Screen"/></p>
 
 You can get this a portable `.exe` file for Windows [here](https://github.com/nimaid/GLaDOS-TTS/releases/latest/download/speak.exe).
 
@@ -77,7 +77,7 @@ You can optionally choose to save to a `.wav` file with the `-o`/`--output` para
 If you want to prevent the text from being read aloud, use the `-q`/`--quiet` flag. This is useful when you just want to make a `.wav` file with the `-o` parameter.
 
 ## In Custom Code
-<p align="center"><img src="tts_module.png" alt="Python Module Splash Screen"/></p>
+<p align="center"><img src="resources/tts_module.png" alt="Python Module Splash Screen"/></p>
 
 Below is a more comprehensive example of using the module in your own code.
 
