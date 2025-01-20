@@ -75,8 +75,8 @@ if !errorlevel! EQU 0 (
     )
     
     echo Cheking if virtual environment is already installed...
-    FOR /F "tokens=*" %%g IN ('conda env list ^| findstr /R /C:"glados"') do (set env_installed="%%g")
-    if defined env_installed (
+    conda list --name glados >nul 2>nul
+        if !errorlevel! EQU 0 (
         echo Virtual environment already installed.
         goto DOWNLOAD_MODELS
     )
