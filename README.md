@@ -113,3 +113,7 @@ tts.play_audio(audio)
 # Save the generated audio as a wave file
 tts.save_wav(audio, "example.wav")
 ```
+
+# Todo
+- Apply upstream changes from main GLaDOS repo
+- Fix run script on Win to detect .venv / conda / the environment
